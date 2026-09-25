@@ -12,6 +12,16 @@ manual step, because a step nobody has to remember is a step nobody forgets.
 The version is the repo's short commit hash when this is a git checkout (so it reads
 like a real build id); otherwise it falls back to a short hash of the tracked files'
 contents, which still changes exactly when the deployed bytes change.
+
+Workflow in a git checkout: commit your real changes FIRST, then run this script, then
+deploy. It stamps whatever HEAD already is — it can't embed its own commit's hash,
+since running it and then committing the result would just move HEAD again (a file
+can't contain the hash of the commit that adds it). So `sw.js`'s stamped VERSION line
+is always exactly one commit "behind" if you commit it on its own; that's expected,
+not a bug, and not worth chasing — don't loop running this script and committing the
+result. Either leave the stamp uncommitted between deploys (`js/version.js` already
+is, permanently — see .gitignore), or fold `sw.js`'s one-line change into your next
+real commit instead of giving it a commit of its own.
 """
 import hashlib
 import json
