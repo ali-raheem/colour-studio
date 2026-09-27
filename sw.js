@@ -7,7 +7,7 @@
  * always changes exactly when a deploy needs it to. (tests/sw.test.js checks the
  * ASSETS list matches what index.html loads.)
  */
-const VERSION = 'v3c2db81f20';
+const VERSION = 'v824348cc67';
 const CACHE = `colour-studio-${VERSION}`;
 
 const ASSETS = [
