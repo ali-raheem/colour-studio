@@ -45,6 +45,17 @@ test('manifest icons are precached and real PNG/SVG files', () => {
   assert.equal(manifest.display, 'standalone');
 });
 
+test('manifest id is fixed and independent of start_url', () => {
+  // An explicit `id` is what keeps a reinstall (or a future start_url change, e.g. adding a
+  // tracking query string) recognised as the SAME app rather than a duplicate. An id that's just
+  // "./" happens to resolve to the same URL as start_url today, which invites exactly the drift
+  // it's meant to prevent, so it must be its own absolute, origin-anchored path instead.
+  const manifest = JSON.parse(read('manifest.webmanifest'));
+  assert.ok(manifest.id, 'manifest has no id');
+  assert.match(manifest.id, /^\//, 'id should be an absolute path (leading "/"), not resolved relative to start_url');
+  assert.notEqual(manifest.id, manifest.start_url, 'id must not be a literal copy of start_url');
+});
+
 test('scripts are listed in load order: color → names/palettes → version → app', () => {
   const html = read('index.html');
   const order = [...html.matchAll(/<script src="([^"]+)"/g)].map((m) => m[1]);
