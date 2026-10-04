@@ -7,7 +7,7 @@
  * always changes exactly when a deploy needs it to. (tests/sw.test.js checks the
  * ASSETS list matches what index.html loads.)
  */
-const VERSION = 'v824348cc67';
+const VERSION = 'vb644b5a100';
 const CACHE = `colour-studio-${VERSION}`;
 
 const ASSETS = [
@@ -54,13 +54,17 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
 
+  // Look only in our own cache: caches.match() would search every cache on the origin,
+  // including those of other apps hosted alongside this one.
   event.respondWith(
-    caches.match(req, { ignoreSearch: true }).then(
-      (hit) =>
-        hit ||
-        fetch(req).catch(() =>
-          req.mode === 'navigate' ? caches.match('index.html') : Response.error()
-        )
+    caches.open(CACHE).then((cache) =>
+      cache.match(req, { ignoreSearch: true }).then(
+        (hit) =>
+          hit ||
+          fetch(req).catch(() =>
+            req.mode === 'navigate' ? cache.match('index.html') : Response.error()
+          )
+      )
     )
   );
 });

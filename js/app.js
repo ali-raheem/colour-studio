@@ -798,7 +798,9 @@
 
     window.addEventListener('load', () => {
       navigator.serviceWorker
-        .register('sw.js')
+        // Explicit scope: even if sw.js is ever served from a parent path, only this app's
+        // directory is controlled, never sibling apps on the same origin.
+        .register('sw.js', { scope: './' })
         .then((reg) => {
           if (reg.waiting && hadController) offer(reg.waiting);
           reg.addEventListener('updatefound', () => {
