@@ -32,7 +32,7 @@ Colour Studio is deployed at `/colours/` next to other apps on shoryuken.me:
 
 ## Deployment
 
-Live at https://shoryuken.me/colours/ (`/var/www/shoryuken.me/colours/`; see the server's `/var/www/shoryuken.me/CLAUDE.md`). Commit, run `scripts/build_version.py`, run the tests, then ship only the served files:
+Live at https://shoryuken.me/colours/ (`/var/www/shoryuken.me/colours/`; server conventions are in `../CLAUDE.md`). Commit, run `scripts/build_version.py`, run the tests, then ship only the served files:
 
 ```bash
 rsync -a --delete --chmod=D755,F644 index.html manifest.webmanifest sw.js style.css js icons root@185.163.204.17:/var/www/shoryuken.me/colours/
