@@ -7,7 +7,7 @@
  * always changes exactly when a deploy needs it to. (tests/sw.test.js checks the
  * ASSETS list matches what index.html loads.)
  */
-const VERSION = 'vb644b5a100';
+const VERSION = 've103116acb';
 const CACHE = `colour-studio-${VERSION}`;
 
 const ASSETS = [
@@ -52,7 +52,8 @@ self.addEventListener('message', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
-  if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
+  // The scope includes the origin and path, so other apps' requests pass straight through.
+  if (req.method !== 'GET' || !req.url.startsWith(self.registration.scope)) return;
 
   // Look only in our own cache: caches.match() would search every cache on the origin,
   // including those of other apps hosted alongside this one.
