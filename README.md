@@ -129,3 +129,7 @@ node --test tests/*.test.js     # Node 18+, no install needed
 Covers colour-space reference values, CIEDE2000 against the published test pairs, parse/format round trips,
 palette invariants (sizes, gamut, WCAG targets), that every file the page loads is in the service worker's
 precache list, and that `js/version.js` is current for the committed files.
+
+## Licence
+
+[MIT](LICENSE) © 2026 Ali Raheem.
