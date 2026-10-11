@@ -1,5 +1,14 @@
 # Colour Studio
 
+[![CI](https://github.com/ali-raheem/colour-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/ali-raheem/colour-studio/actions/workflows/ci.yml) [![GitHub Pages](https://github.com/ali-raheem/colour-studio/actions/workflows/pages.yml/badge.svg)](https://github.com/ali-raheem/colour-studio/actions/workflows/pages.yml)
+
+**▶ Try it live: [shoryuken.me/colours](https://shoryuken.me/colours/)** · mirror on [GitHub Pages](https://ali-raheem.github.io/colour-studio/) · installable, works offline
+
+<p align="center">
+  <a href="https://shoryuken.me/colours/"><img src="docs/screenshots/desktop.webp" alt="Colour Studio on a desktop browser" width="74%"></a>
+  <a href="https://shoryuken.me/colours/"><img src="docs/screenshots/mobile.webp" alt="Colour Studio on a phone" width="22%"></a>
+</p>
+
 An offline-installable colour picker and palette generator. Pick or type a colour, see it in every
 common format, find its nearest named colours, and generate palettes around it — harmonies, scales,
 gradients and UI/accessibility sets.
